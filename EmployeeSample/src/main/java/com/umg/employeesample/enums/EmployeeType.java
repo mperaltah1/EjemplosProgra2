@@ -12,10 +12,15 @@ public enum EmployeeType {
     MANAGER(0, "Gerente"),
     EXECUTIVE(1, "Ejecutivo"),
     DEVELOPER(2,"Programador"),
-    SECRETARY(3,"Secretaria");
+    SECRETARY(3,"Secretaria"),
+    ACCOUNTANT(4, "Contador");
 
     private final int id;
     private final String label;
+
+    public String getLabel() {
+        return label;
+    }
 
     private EmployeeType(int id, String label) {
         this.id = id;

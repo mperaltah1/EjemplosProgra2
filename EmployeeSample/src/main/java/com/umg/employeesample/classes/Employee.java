@@ -52,11 +52,18 @@ public abstract class Employee implements iEmployee{
     }
     
     private void calculateOrdSalary() {
-        ordSalary = 160 * hourPrice;
+        if(workedHours < 160) {
+            ordSalary = workedHours * hourPrice;
+        }
+        else {
+            ordSalary = 160 * hourPrice;
+        }
     }
     
     private void calculateExtSalary() {
-        extSalary = (workedHours - 160) * 1.5 * hourPrice;
+        if(workedHours >= 160) {
+            extSalary = (workedHours - 160) * 1.5 * hourPrice;
+        }
     }
     
     private void calculateDiscounts() {

@@ -4,6 +4,7 @@
  */
 package com.umg.employeesample;
 
+import com.umg.employeesample.classes.Accountant;
 import com.umg.employeesample.classes.Developer;
 import com.umg.employeesample.classes.Employee;
 import com.umg.employeesample.classes.Executive;
@@ -12,8 +13,12 @@ import com.umg.employeesample.classes.Secretary;
 import com.umg.employeesample.enums.EmployeeType;
 import static com.umg.employeesample.enums.EmployeeType.EXECUTIVE;
 import static com.umg.employeesample.enums.EmployeeType.MANAGER;
+import static com.umg.employeesample.enums.EmployeeType.SECRETARY;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,6 +60,35 @@ public class Formulario extends javax.swing.JFrame {
         dataColumns[6] = emp.getDiscounts();
         dataColumns[7] = emp.getSalary();
         model.addRow(dataColumns);
+        
+        /*if(Manager.class.isInstance(emp)) {
+            System.out.println("El empleado es un gerente");
+        }
+        if(Secretary.class.isInstance(emp)) {
+            System.out.println("El empleado es una secretaria");
+        }*/
+        
+        if(emp instanceof Manager) {
+            System.out.println("El empleado es un gerente");
+        }
+        if(emp instanceof Secretary) {
+            System.out.println("El empleado es una secretaria");
+        }
+    }
+    
+    public void readFile() {
+        String location = "Employees.csv";
+        File f = new File(location);
+        try ( Scanner sc = new Scanner(f)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] data = line.split(",");
+                
+            }
+            System.out.println("Archivo leido exitosamente");
+        } catch (IOException ex) {
+            System.out.println("Ocurrio un error al tratar de leer el archivo");
+        }
     }
 
     /**
@@ -76,6 +110,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtHours = new javax.swing.JTextField();
         btnCalculateSalary = new javax.swing.JButton();
+        btnCargaMasiva = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
@@ -101,6 +136,13 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        btnCargaMasiva.setText("Cargar CSV");
+        btnCargaMasiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargaMasivaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,8 +162,10 @@ public class Formulario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtHours, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(185, 185, 185)
-                .addComponent(btnCalculateSalary)
+                .addGap(182, 182, 182)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCalculateSalary)
+                    .addComponent(btnCargaMasiva))
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +191,9 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(txtHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCargaMasiva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCalculateSalary)
                         .addGap(20, 20, 20))))
         );
@@ -200,7 +246,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,6 +272,10 @@ public class Formulario extends javax.swing.JFrame {
             case SECRETARY -> {
                 emp = new Secretary(dpi, name, hours);
             }
+            case ACCOUNTANT -> {
+                emp = new Accountant(dpi, name, hours);
+                
+            }
             default -> {
                 emp = null;
             }
@@ -235,6 +285,11 @@ public class Formulario extends javax.swing.JFrame {
             addToModel(emp);
         }
     }//GEN-LAST:event_btnCalculateSalaryActionPerformed
+
+    private void btnCargaMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargaMasivaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCargaMasivaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +328,7 @@ public class Formulario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculateSalary;
+    private javax.swing.JButton btnCargaMasiva;
     private javax.swing.JComboBox<String> cmbEmpType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
