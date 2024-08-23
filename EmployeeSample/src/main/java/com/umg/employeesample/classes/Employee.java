@@ -4,6 +4,7 @@
  */
 package com.umg.employeesample.classes;
 
+import com.umg.employeesample.enums.EmployeeType;
 import com.umg.employeesample.interfaces.iEmployee;
 
 public abstract class Employee implements iEmployee{
@@ -16,6 +17,7 @@ public abstract class Employee implements iEmployee{
     private double discounts;
     protected double discountPercent;
     private double salary;
+    private EmployeeType Type;
     
     public Employee(int dpi, String name, int hours) {
         this.dpi = dpi;
@@ -50,6 +52,16 @@ public abstract class Employee implements iEmployee{
     public double getSalary() {
         return salary;
     }
+
+    public EmployeeType getType() {
+        return Type;
+    }
+
+    public void setType(EmployeeType Type) {
+        this.Type = Type;
+    }
+    
+    
     
     private void calculateOrdSalary() {
         if(workedHours < 160) {
