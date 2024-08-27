@@ -36,7 +36,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" + "identificador=" + id + ", nombre=" + name + '}';
+        return "Node{" + "ID=" + id + ", nombre=" + name + '}';
     }
     
     

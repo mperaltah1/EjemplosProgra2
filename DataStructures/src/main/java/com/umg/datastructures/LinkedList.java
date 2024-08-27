@@ -58,7 +58,7 @@ public class LinkedList {
         return true;
     }
 
-    public boolean removeFirst() {
+    private boolean removeFirst() {
         if (isEmpty()) {
             return false;
         }
