@@ -50,7 +50,7 @@ public class LinkedList {
     }
 
     public boolean updateName(long id, String newName) {
-        Node temp =search(id);
+        Node temp = search(id);
         if (temp == null) {
             return false;
         }
