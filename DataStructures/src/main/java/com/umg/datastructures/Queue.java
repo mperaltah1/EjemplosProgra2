@@ -8,7 +8,6 @@ import com.umg.datastructures.nodes.Node;
  * @author mrph0
  */
 public class Queue {
-
     //FIFO -> First In, First Out
     private Node first;
     private Node last;

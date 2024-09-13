@@ -20,11 +20,11 @@ public class TestQueue {
         cola.enqueue(f);
 
         Node i = new Node(2, "Instagram");
-        System.out.println("Agregando instagram a la pila");
+        System.out.println("Agregando instagram a la cola");
         cola.enqueue(i);
 
         Node y = new Node(3, "Youtube");
-        System.out.println("Agregando Youtube a la pila");
+        System.out.println("Agregando Youtube a la cola");
         cola.enqueue(y);
         
         Node t = cola.dequeue();
